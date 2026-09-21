@@ -1,0 +1,24 @@
+# Example only. Replace PCI BDF, backing mount and absolute view_root before use.
+# Match the verified device constants in src/run_abba_continuation.py.
+grpc:
+  endpoint: "127.0.0.1:50173"
+accelerators:
+  - accel_id: 0
+    view_root: "/ABSOLUTE/PATH/TO/hisparse_io/build/tutti-view"
+nvmes:
+  - device_id: 0
+    pci_addr: "REPLACE_WITH_VERIFIED_PCI_BDF"
+    backing_mount_path: "/REPLACE_WITH_EXPERIMENT_MOUNT"
+    namespace_id: 1
+    kernel_ioq_cap: 32
+    allowed_accel_ids: [0]
+    auto_mount: true
+queue_pool:
+  default_per_client: 16
+  max_per_client: 16
+lease:
+  heartbeat_interval_sec: 10
+  timeout_sec: 120
+unmount_retry:
+  interval_ms: 1000
+  max: 30

@@ -1,0 +1,19 @@
+{
+  "shared_binaries_and_libraries_unchanged": true,
+  "experiment_mount_active": false,
+  "cb_driver": null,
+  "shared_daemon_pid": 1146476,
+  "shared_daemon_still_running": true,
+  "shared_mounts": [
+    "/dev/snvme0n1 /mnt/snvme/nvme0",
+    "/dev/snvme1n1 /mnt/snvme/nvme1",
+    "/dev/snvme2n1 /mnt/snvme/nvme2",
+    "/dev/snvme3n1 /mnt/snvme/nvme3"
+  ],
+  "core_module_sizes": {
+    "snvme": "217088",
+    "nvidia_fs": "258048",
+    "nvidia_uvm": "1675264",
+    "nvidia": "16244736"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "evidence": "results/run-20260907-101847-hisparse/logs/A1/cufile_1398514_2026-09-07.10:20:15.log",
+  "sha256": "6eb596df7c7d21ece050ce5d911eb6847bd27459f8919895f094c3d1dbda1d75",
+  "counters": {
+    "BatchSubmit": 1156884,
+    "BatchComplete": 1156884,
+    "PosixBatchEnqueued": 0,
+    "PosixBatchProcessed": 0,
+    "BufRegister": 256,
+    "BufDeregister": 256
+  },
+  "compatibility_allowed": false,
+  "path": "cuFile batch / nvidia_fs"
+}

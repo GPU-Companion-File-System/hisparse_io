@@ -1,0 +1,98 @@
+{
+  "status": "verified",
+  "phase_design": "fresh_sequential_abba",
+  "phases": {
+    "A1": {
+      "raw_file": "/home/byh/hisparse_io/results/run-20260907-101847-hisparse/raw-A1.csv",
+      "raw_sha256": "4c2824d6c744f5eece340c09a99eaf5c31b9b18ed02358381ee0282e097bb2cf",
+      "rows": 2544,
+      "bdf": "0000:cb:00.0",
+      "start": 1788776409.4457085,
+      "end": 1788776652.2534163,
+      "all_reads_verified": true,
+      "direct_path": {
+        "evidence": "/home/byh/hisparse_io/results/run-20260907-101847-hisparse/logs/A1/cufile_1398514_2026-09-07.10:20:15.log",
+        "sha256": "6eb596df7c7d21ece050ce5d911eb6847bd27459f8919895f094c3d1dbda1d75",
+        "counters": {
+          "BatchSubmit": 1156884,
+          "BatchComplete": 1156884,
+          "PosixBatchEnqueued": 0,
+          "PosixBatchProcessed": 0,
+          "BufRegister": 256,
+          "BufDeregister": 256
+        },
+        "compatibility_allowed": false,
+        "path": "cuFile batch / nvidia_fs"
+      },
+      "gpu": "0000:4b:00.0",
+      "trace_sha256": "2c4503982f3992ae87dce934c6dc69cd77d800bd8593ed00b95a9e2784bc5653"
+    },
+    "B1": {
+      "raw_file": "/home/byh/hisparse_io/results/run-20260907-101847-hisparse/raw-B1.csv",
+      "raw_sha256": "d994baf3c1055aa23e93d14ace73559e2d03c444ac0119097d086ab8d9a23c58",
+      "rows": 2544,
+      "bdf": "0000:cb:00.0",
+      "start": 1788776657.9174826,
+      "end": 1788776738.642329,
+      "all_reads_verified": true,
+      "direct_path": {
+        "path": "deployed launch_pool_file_xfer GPU kernel",
+        "evidence": "/home/byh/hisparse_io/results/run-20260907-101847-hisparse/logs/B1.log",
+        "sha256": "d213a2cb32f40e87cb181b15e0b7b6806f0beccba8d0cdd8e8206039c55620f3"
+      },
+      "gpu": "0000:4b:00.0",
+      "trace_sha256": "2c4503982f3992ae87dce934c6dc69cd77d800bd8593ed00b95a9e2784bc5653"
+    },
+    "B2": {
+      "raw_file": "/home/byh/hisparse_io/results/run-20260907-101847-hisparse/raw-B2.csv",
+      "raw_sha256": "fd3f74437312ac64da45dbee26e17a5717f92661121a39aee58ebad3fce1d682",
+      "rows": 2544,
+      "bdf": "0000:cb:00.0",
+      "start": 1788776738.643758,
+      "end": 1788776821.1247084,
+      "all_reads_verified": true,
+      "direct_path": {
+        "path": "deployed launch_pool_file_xfer GPU kernel",
+        "evidence": "/home/byh/hisparse_io/results/run-20260907-101847-hisparse/logs/B2.log",
+        "sha256": "96ba8c54d138e98e4f08879b246025666069a96098a75afbb692f127fcd22308"
+      },
+      "gpu": "0000:4b:00.0",
+      "trace_sha256": "2c4503982f3992ae87dce934c6dc69cd77d800bd8593ed00b95a9e2784bc5653"
+    },
+    "A2": {
+      "raw_file": "/home/byh/hisparse_io/results/run-20260907-101847-hisparse/raw-A2.csv",
+      "raw_sha256": "0f02eaa1208bbe247062cf9b22d9c0d6dc76971f1b634f4e0014034680632254",
+      "rows": 2544,
+      "bdf": "0000:cb:00.0",
+      "start": 1788776824.5794158,
+      "end": 1788777059.5306885,
+      "all_reads_verified": true,
+      "direct_path": {
+        "evidence": "/home/byh/hisparse_io/results/run-20260907-101847-hisparse/logs/A2/cufile_1405055_2026-09-07.10:27:10.log",
+        "sha256": "761191461c1d5607284a8f9af23808f77e7dd65f979badda4382a37099d06cf9",
+        "counters": {
+          "BatchSubmit": 1156884,
+          "BatchComplete": 1156884,
+          "PosixBatchEnqueued": 0,
+          "PosixBatchProcessed": 0,
+          "BufRegister": 256,
+          "BufDeregister": 256
+        },
+        "compatibility_allowed": false,
+        "path": "cuFile batch / nvidia_fs"
+      },
+      "gpu": "0000:4b:00.0",
+      "trace_sha256": "2c4503982f3992ae87dce934c6dc69cd77d800bd8593ed00b95a9e2784bc5653"
+    }
+  },
+  "bdf": "0000:cb:00.0",
+  "serial": "PHCP418201G07P6CGN",
+  "uuid": "4885b88d-00be-4e57-86a8-2c1f837e4917",
+  "data_sha256": "6e412d41f9e2eb526febb789788ec73ea822d646e8891320a9dcc0ce63c3ab13",
+  "trace_sha256": "2c4503982f3992ae87dce934c6dc69cd77d800bd8593ed00b95a9e2784bc5653",
+  "timing_caveat": "All four stages freshly measured sequentially; device handovers and separate initialization remain.",
+  "events": {
+    "operations.json": "7f202d85a068c0699be6c9136a84b62eb2fb62284ededd3f1138cd6fc1499b0e"
+  },
+  "audit_script_sha256": "3907fea43be79742e084e23334417f36b223a0c89eef54cec0aac617a18c9f10"
+}

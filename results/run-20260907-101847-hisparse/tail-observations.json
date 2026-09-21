@@ -1,0 +1,34 @@
+[
+  {
+    "stage": "A1",
+    "request_batch": 1,
+    "miss_rate": 0.067,
+    "n_reads": 137,
+    "round": 78,
+    "max_ms": 1701.578079
+  },
+  {
+    "stage": "B1",
+    "request_batch": 64,
+    "miss_rate": 0.3,
+    "n_reads": 39322,
+    "round": 45,
+    "max_ms": 31.871744
+  },
+  {
+    "stage": "B2",
+    "request_batch": 64,
+    "miss_rate": 0.3,
+    "n_reads": 39322,
+    "round": 112,
+    "max_ms": 30.766239000000002
+  },
+  {
+    "stage": "A2",
+    "request_batch": 1,
+    "miss_rate": 0.134,
+    "n_reads": 274,
+    "round": 140,
+    "max_ms": 966.60891
+  }
+]

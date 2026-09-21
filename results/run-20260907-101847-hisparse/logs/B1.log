@@ -1,0 +1,35 @@
+COMMAND: ["sudo", "-n", "env", "CUDA_VISIBLE_DEVICES=0", "LD_LIBRARY_PATH=/home/zwh/lmcache-dev/.build/vllm027-torch213-cu130/geminifs/lib:/home/zwh/.venvs/lmcache-mooncake-latest/lib/python3.12/site-packages/nvidia/cu13/lib:/home/zwh/anaconda3/lib", "/home/byh/hisparse_io/build/tutti_shared_bench", "/mnt/hisparse_io/hisparse_io_byh/bench-20260907-083221.bin", "/home/byh/hisparse_io/results/run-20260907-101847-hisparse/trace.bin", "/home/byh/hisparse_io/results/run-20260907-101847-hisparse/raw-B1.csv", "0", "0000:cb:00.0", "127.0.0.1:50173"]
+[svc-registry] acquire ok: daemon_dev=0 daemon_accel=0 cuda=0 granted=16 snvme=/dev/ssnvme4 bar0=32768 page=4096 blk=4096 qdepth=1024
+[svc-registry] attach_client ok: ctrl=0x7f9ae8002388
+[svc-registry] building queue group: nq=16 qd=1024 ns=1 disk=snvme4n1 page=4096 blk=4096
+[svc-registry] queue group ok: n_qps=16 group_id=1
+[svc-registry] open_one done: device_id=0
+Tutti-deployed BDF=0000:cb:00.0 device=/dev/snvme4n1 NVMe_queues=16 queue_entries=1024
+[prp_pool] init: L1=16384 slots x 4096 B = 65536 KiB (GPU, DMA-mapped, n_ioaddrs=16384), L2=262144 slots x 4096 B = 1048576 KiB (host-pinned)
+[prp_cache] init: scatter-patch staging = 16384 pairs
+phase=2 n_reads=137 PASS
+phase=3 n_reads=137 PASS
+phase=2 n_reads=274 PASS
+phase=3 n_reads=274 PASS
+phase=2 n_reads=614 PASS
+phase=3 n_reads=614 PASS
+phase=2 n_reads=549 PASS
+phase=3 n_reads=549 PASS
+phase=2 n_reads=1098 PASS
+phase=3 n_reads=1098 PASS
+phase=2 n_reads=2458 PASS
+phase=3 n_reads=2458 PASS
+phase=2 n_reads=2195 PASS
+phase=3 n_reads=2195 PASS
+phase=2 n_reads=4391 PASS
+phase=3 n_reads=4391 PASS
+phase=2 n_reads=9830 PASS
+phase=3 n_reads=9830 PASS
+phase=2 n_reads=8782 PASS
+phase=3 n_reads=8782 PASS
+phase=2 n_reads=17564 PASS
+phase=3 n_reads=17564 PASS
+phase=2 n_reads=39322 PASS
+phase=3 n_reads=39322 PASS
+
+EXIT: 0

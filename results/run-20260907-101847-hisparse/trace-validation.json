@@ -1,0 +1,8 @@
+{
+  "status": "pass",
+  "records": 2544,
+  "exact_profile_counts": true,
+  "unique_file_offsets": true,
+  "unique_hbm_slots": true,
+  "invalid_profile_rejected": true
+}

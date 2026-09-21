@@ -1,0 +1,33 @@
+{
+  "date": "2026-09-21",
+  "status": "pass",
+  "git_branch": "main",
+  "local_commit_created": false,
+  "remote_configured": false,
+  "remote_repository_created": false,
+  "push_performed": false,
+  "verification_scope": "exported staged files, with pre-existing Python dependencies only",
+  "clean_export_cpu_reproduction": {
+    "status": "pass",
+    "source_archive": "/tmp/hisparse-publish-review-yo_orttm/results/run-20260907-101847-hisparse",
+    "trace_sha256": "2c4503982f3992ae87dce934c6dc69cd77d800bd8593ed00b95a9e2784bc5653",
+    "measured_rows": 9600,
+    "regenerated_trace_matches": true,
+    "csv_tables_match": true,
+    "gpu_workload_started": false,
+    "numeric_tolerance": {
+      "relative": 1e-10,
+      "absolute": 1e-10
+    },
+    "note": "Temporary input paths in regenerated manifests are historical review paths; source_archive holds retained inputs."
+  },
+  "python_syntax": "pass",
+  "internal_markdown_links": "pass",
+  "staged_whitespace": "pass (archived result whitespace preserved)",
+  "credential_scan": "no private-key/GitHub-token/AWS-access-key patterns detected; not a comprehensive secret audit",
+  "build_recipe": "make dry-run only; shared dependencies and hardware benchmarks not rebuilt or executed",
+  "measured_cpp_fingerprints": "unchanged",
+  "refuses_existing_review_output": true,
+  "large_artifacts_and_future_results_ignored": true,
+  "original_local_artifacts_deleted": false
+}

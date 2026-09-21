@@ -1,0 +1,9 @@
+nvmeservice: device_id=0 pci_bdf=0000:cb:00.0 chrdev=/dev/ssnvme4 block=/dev/snvme4n1 capacity=96 max_q_per_group=16 control_ready=1
+tutti_daemon: pre-mount O_DIRECT read probe passed device_id=0 block=/dev/snvme4n1 bytes=4096
+mount_manager: mounted /dev/snvme4n1 at /mnt/hisparse_io (owned)
+tutti_daemon listening on 127.0.0.1:50173 (port 50173) block_size=4096
+Owned devices:
+  device_id=0 pci=0000:cb:00.0 chrdev=/dev/ssnvme4 block=/dev/snvme4n1 ns=1 block_size=4096 io_qp_limit=128 kernel_io_qps=32 user_io_qps=96 max_user_qid=128 max_q_per_grp=16
+Shutting down...
+mount_manager: unmounted /mnt/hisparse_io
+tutti_daemon exited cleanly.

@@ -1,0 +1,57 @@
+{
+  "inputs": {
+    "A1": {
+      "path": "/home/byh/hisparse_io/results/run-20260907-101847-hisparse/raw-A1.csv",
+      "sha256": "4c2824d6c744f5eece340c09a99eaf5c31b9b18ed02358381ee0282e097bb2cf",
+      "rows": 2544
+    },
+    "B1": {
+      "path": "/home/byh/hisparse_io/results/run-20260907-101847-hisparse/raw-B1.csv",
+      "sha256": "d994baf3c1055aa23e93d14ace73559e2d03c444ac0119097d086ab8d9a23c58",
+      "rows": 2544
+    },
+    "B2": {
+      "path": "/home/byh/hisparse_io/results/run-20260907-101847-hisparse/raw-B2.csv",
+      "sha256": "fd3f74437312ac64da45dbee26e17a5717f92661121a39aee58ebad3fce1d682",
+      "rows": 2544
+    },
+    "A2": {
+      "path": "/home/byh/hisparse_io/results/run-20260907-101847-hisparse/raw-A2.csv",
+      "sha256": "0f02eaa1208bbe247062cf9b22d9c0d6dc76971f1b634f4e0014034680632254",
+      "rows": 2544
+    }
+  },
+  "audit_sha256": "049813ea5a74125aa055dc880b607272fb8713593cbb48d95d52b9a784c633c3",
+  "trace_sha256": "2c4503982f3992ae87dce934c6dc69cd77d800bd8593ed00b95a9e2784bc5653",
+  "script_sha256": "acb59170c92f137b3d0055fde7fdfde01ab834b3882649020c40994fe06f3bf3",
+  "numpy": "1.26.4",
+  "matplotlib": "3.10.0",
+  "excluded_measurement_rows": 0,
+  "estimators": "linear percentiles; aggregate IOPS; pooled backend samples; no inferential statistics",
+  "figure": {
+    "latency_inches": [
+      12,
+      7
+    ],
+    "latency_pixels": [
+      2400,
+      1400
+    ],
+    "iops_inches": [
+      12,
+      3.8
+    ],
+    "iops_pixels": [
+      2400,
+      760
+    ],
+    "dpi": 200,
+    "formats": [
+      "png",
+      "pdf"
+    ],
+    "axes": "log2 x and log10 latency y, zero-based linear IOPS y; reject nonpositive latencies",
+    "uncertainty": "none; separate observed stages",
+    "destination": "internal research report; no journal compliance claimed"
+  }
+}

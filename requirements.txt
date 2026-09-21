@@ -1,0 +1,4 @@
+# Versions used for the archived trace generation and result analysis.
+# Direct dependency pins; this is not a complete transitive lockfile.
+numpy==1.26.4
+matplotlib==3.10.0
