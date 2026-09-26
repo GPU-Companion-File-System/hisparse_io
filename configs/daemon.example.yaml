@@ -1,10 +1,9 @@
-# Example only. Replace PCI BDF, backing mount and absolute view_root before use.
-# Match the verified device constants in src/run_abba_continuation.py.
+# Template for the public Tutti v0.1.1 daemon. Replace every placeholder.
 grpc:
   endpoint: "127.0.0.1:50173"
 accelerators:
   - accel_id: 0
-    view_root: "/ABSOLUTE/PATH/TO/hisparse_io/build/tutti-view"
+    view_root: "/ABSOLUTE/PATH/TO/tutti-v011-view"
 nvmes:
   - device_id: 0
     pci_addr: "REPLACE_WITH_VERIFIED_PCI_BDF"

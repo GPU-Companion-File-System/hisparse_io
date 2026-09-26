@@ -1,57 +1,30 @@
-# Git 与发布准备
+# 发布范围
 
-整理日期：2026-09-21。整理前项目根目录没有 Git 仓库；本次在本地初始化 `main`。
-组织私有仓库为 [GPU-Companion-File-System/hisparse_io](https://github.com/GPU-Companion-File-System/hisparse_io)，主分支为 `main`。
-2026-09-21 按用户要求创建 private 仓库并准备首次提交。项目许可证仍待维护者确定。
-`preparation-checks.json` 是创建远端之前的准备阶段记录，其中的 Git/remote 状态仅描述当时状态。
+仓库当前只发布可复核的 GDS 与公开 Tutti v0.1.1 关键对照。
 
-## 发布范围
+## 提交内容
 
-| 内容 | 处理 |
-|---|---|
-| README、参数定义、依赖/运行说明、复核脚本 | 提交 |
-| 两个 C++ benchmark、公共头文件、Makefile | 提交 |
-| 活跃的 trace 生成、四阶段运行、审计和分析脚本 | 提交 |
-| `run_abba_continuation.py` | 作为活跃运行器依赖的设备/部署辅助模块提交；旧 CLI 标为历史入口 |
-| `configs/` 中负载、cuFile 与 daemon 模板 | 提交 |
-| 最新完整实验的原始 CSV、图表、配置、验证证据 | 明确白名单提交 |
-| 大型 trace、实际 NVMe 数据、build、.venv、__pycache__ | 忽略，本地保留 |
-| third_party 下 Tutti 源码、部署快照、CUDA 和动态库 | 忽略，引用外部安装 |
-| 旧 CMake smoke、旧 smoke runner、一次性 udev 规则、旧恢复脚本 | 不纳入首批发布，本地保留 |
-| STORAGE.md 和旧失败/调试结果 | 不纳入首批发布；README/RUNNING 提供当前运行说明 |
+- benchmark 源码、workload/profile 脚本和参数配置；
+- 公开 Tutti 构建、ABI 预检和比较表脚本；
+- `results/key-comparison-cb-20260926/` 中的精选 CSV、日志、配置和小型元数据；
+- 依赖、运行和负载语义文档。
 
-结果约几 MB，不需要为大文件配置 Git LFS。具体大小和逐文件 SHA-256 见
-`docs/publication-manifest.json`；该清单描述首次提交的发布文件内容，排除清单本身和最终准备检查记录以避免自引用。
+## 不提交内容
 
-历史证据中的本机路径、BDF、序列号与哈希有助于复核，保持原样；它们不是通用运行配置。
-新的 daemon 模板使用显式占位符，活跃运行器从 `configs/cufile.json` 读取配置，
-不再依赖未发布的早期结果目录。
+- 16 GiB 数据文件、trace.bin、build、`.venv` 和缓存；
+- CUDA、cuFile、Tutti 或 daemon 的源码副本、动态库、可执行文件和内核模块；
+- 旧部署适配器、旧完整 Tutti 结果和一次性调试文件；
+- 任何无法通过数据校验或 ABI 检查的结果。
 
-## 本地检查
+根目录 `.gitignore` 使用发布白名单保护结果目录；新增结果前应先确认文件类型和大小，再显式加入白名单。
+
+发布前检查：
 
 ```bash
-git status --short
-git diff --cached --stat
-git diff --cached --check
-git ls-files
+python3 -m compileall -q src tools
+python3 tools/verify_key_comparison.py
+git diff --check
+git ls-files | rg '(^|/)(build|third_party|trace\\.bin|.*\\.so$|.*\\.ko$)' && exit 1 || true
 ```
 
-从暂存区导出到临时干净目录，在该目录运行 CPU-only 结果复核工具。
-本次不会重新运行 GPU 性能测试、修改磁盘绑定或重建共享依赖。
-
-## 远端与后续提交
-
-`origin` 使用 SSH：`git@github.com:GPU-Companion-File-System/hisparse_io.git`。
-首次提交使用之前复核的白名单内容；不包含依赖库副本、build 或大型 trace。
-`publication-manifest.json` 的时间点为首次提交前，不在提交内部预先声称推送成功。
-
-后续变更先检查暂存差异，再提交并推送：
-
-```bash
-git diff --cached --check
-git diff --cached --stat
-git commit
-git push origin main
-```
-
-增加关键实验时需同步更新 `.gitignore` 白名单；历史原始数据、日志和哈希不随代码更新改写。
+公开仓库地址为 [GPU-Companion-File-System/hisparse_io](https://github.com/GPU-Companion-File-System/hisparse_io)。项目许可证仍由维护者决定。

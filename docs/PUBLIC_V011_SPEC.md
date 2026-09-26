@@ -1,32 +1,14 @@
-# Public Tutti v0.1.1 migration and rerun
+# 公开 Tutti v0.1.1 规范
 
-## Objective and assumptions
-- User requested a new hardware experiment using public v0.1.1, not reproduction of the unpublished deployment.
-- Pin tag v0.1.1 to commit 38c8a68ab99c47a9a31f120b1018b6a7e01734d1 in xPU-IO/Tutti; vendor source must remain unmodified.
-- Use public StorageRuntime + presets::make_local_nvme_runtime (open file URI, register memory, submit, query/wait, release).
-- Keep the existing 12 synthetic HiSparse-derived configurations, 4 KiB reads, 256 IO cap, 16-entry submissions, 200 measured rounds, identical trace across fresh A/B/B/A stages.
-- This remains synthetic miss-volume IO, not a real model/TopK/LRU integration.
+- 上游仓库：`https://github.com/xPU-IO/Tutti`
+- 固定 commit：`38c8a68ab99c47a9a31f120b1018b6a7e01734d1`
+- benchmark：`src/tutti_v011_bench.cpp`
+- 构建入口：`tools/build_tutti_v011.sh`
+- 构建目录：`build/tutti-v011`
+- 预检入口：`tools/preflight_tutti_v011.py`
 
-## Structure and commands
-- cmake/public-tutti-hook.cmake: discover dependencies and attach benchmark targets to the canonical upstream root build.
-- src/tutti_public_bench.cpp: public API backend; src/gds_bench.cpp remains the GDS backend.
-- tools/build_public_tutti.sh: pinned checkout + canonical CMake build with kernel builds disabled.
-- tests/ and upstream CTest: CPU tests; reserved short hardware smoke before full matrix.
-- Build: tools/build_public_tutti.sh
-- Tests: ctest --test-dir build/public-v011 --output-on-failure
-- Preflight (no GPU): python3 tools/preflight_public_tutti.py --device /dev/ssnvme0
-- Hardware runner remains pending until a matching kernel environment is available; no run command is claimed ready.
+适配器使用公开的 `presets::make_local_nvme_runtime` 打开文件、注册 GPU memory、提交 IO、等待完成并释放句柄。它保持 16 个窗口、每窗口最多 16 个请求和 256 的逻辑在途上限。
 
-## Code style
-Retain the existing C++17 RAII/status-check style: `if (!result.ok()) throw std::runtime_error(result.status().message());`.
-Use pathlib, JSON records and exclusive output creation in Python; fail closed on device identity or path-evidence mismatch.
+每条读请求都验证目标 GPU 槽位的确定性内容。程序检查字符设备 ABI、4 KiB 块大小、PCI BDF、文件和块设备是否来自同一 backing device；检查失败时不会提交 GPU IO。
 
-## Verification and boundaries
-- Always: record commit, build/config hashes, dependencies and kernel ABI; reserve GPU; validate every read; preserve raw failures; verify before/after data hashes.
-- Do not: replace/reload modules, stop shared services, format devices, bypass public ABI checks, or silently fall back to host-staged IO.
-- Ask first if new module installation or destructive disk recovery is required.
-- Old results are retired from active repo only after new results pass; retain historical Git commit, do not rewrite remote history or push without request.
-- Success: clean public source build, public API hardware smoke, fresh complete validated ABBA, minimal reproducible result bundle and no unpublished dependency.
-
-## 2026-09-25 checkpoint
-Public user-space build and 16 CTest cases pass. Existing module reports ABI 2; pinned release requires ABI 1 and fails closed. No hardware run attempted. No module/device/service changes. Adapter is compile-tested, not hardware-validated. Old results retained until replacement passes.
+这套实现模拟 HiSparse-derived IO 数量，不是 HiSparse 模型集成，也不实现 LRU 或 miss 生成。内核模块、daemon、文件系统挂载和 GPU 运行属于主机部署步骤，不会随仓库发布。

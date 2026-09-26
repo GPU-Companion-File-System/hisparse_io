@@ -118,6 +118,5 @@
       "reference_mean_miss_rate": 0.3,
       "n_reads": 39322
     }
-  ],
-  "latest_successful_run": "results/run-20260907-101847-hisparse"
+  ]
 }
