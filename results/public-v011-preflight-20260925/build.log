@@ -1,0 +1,32 @@
+[  2%] Built target snvme_info
+[  4%] Built target gds_bench
+[  6%] Built target tutti_config_parse
+[  8%] Built target cuda_like_contract_test
+[ 10%] Built target tutti_memfs_sample_contract_test
+[ 13%] Built target tutti_public_api_usage_test
+[ 15%] Built target tutti_spi_consumer_test
+[ 27%] Built target libnvm
+[ 29%] Built target tutti_status_contract_test
+[ 31%] Built target tutti_data_path_contract_test
+[ 34%] Built target tutti_storage_target_resolver_contract_test
+[ 36%] Built target tutti_io_types_contract_test
+[ 38%] Built target tutti_binding_contract_test
+[ 40%] Built target tutti_storage_runtime_contract_test
+[ 42%] Built target tutti_memory_types_contract_test
+[ 45%] Built target tutti_uapi_contract_test
+[ 47%] Built target tutti_header_hygiene_test
+[ 49%] Built target tutti_striped_resolver_contract_test
+[ 51%] Built target tutti_mock_data_path_kit_contract_test
+[ 56%] Built target tutti_mount_manager_contract_test
+[ 67%] Built target nvmeservice
+[ 76%] Built target tutti_local_nvme_datapath
+[ 79%] Built target tutti_daemon
+[ 81%] Built target nvmeservice_daemon_example
+[ 84%] Built target tutti_config
+[ 89%] Built target nvmeservice_client_example
+[ 93%] Built target tutti_striped_local_nvme_datapath
+[ 96%] Built target tutti_presets
+[ 97%] Building CXX object CMakeFiles/tutti_public_bench.dir/home/byh/hisparse_io/src/tutti_public_bench.cpp.o
+[ 98%] Linking CUDA device code CMakeFiles/tutti_public_bench.dir/cmake_device_link.o
+[100%] Linking CUDA executable bin/tutti_public_bench
+[100%] Built target tutti_public_bench

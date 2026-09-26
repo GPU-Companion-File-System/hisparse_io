@@ -1,0 +1,26 @@
+{
+  "status": "pass",
+  "comparison": "historical GDS A1+A2 versus current public Tutti v0.1.1",
+  "same_physical_disk": {
+    "pci_bdf": "0000:cb:00.0",
+    "serial": "PHCP418201G07P6CGN"
+  },
+  "data": {
+    "path": "/mnt/hisparse_io/hisparse_io_byh/bench-20260907-083221.bin",
+    "bytes": 17179869184,
+    "sha256": "6e412d41f9e2eb526febb789788ec73ea822d646e8891320a9dcc0ce63c3ab13"
+  },
+  "trace": {
+    "path": "results/public-v011-cb-20260926/trace.bin",
+    "bytes": 147965856,
+    "sha256": "2c4503982f3992ae87dce934c6dc69cd77d800bd8593ed00b95a9e2784bc5653"
+  },
+  "historical_gds_source": "results/run-20260907-101847-hisparse/analysis/comparison.csv",
+  "public_tutti_source": "results/public-v011-cb-20260926/raw-B.csv",
+  "public_tutti_commit": "38c8a68ab99c47a9a31f120b1018b6a7e01734d1",
+  "public_rows": 2544,
+  "public_measurement_rows": 2400,
+  "all_public_rows_correct": true,
+  "percentile_method": "numpy linear percentile over 200 phase=1 rows per configuration",
+  "limitation": "GDS values are historical 2026-09-07 A1+A2 samples; public Tutti values are current 2026-09-26 samples."
+}

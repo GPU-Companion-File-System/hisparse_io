@@ -16,6 +16,8 @@ def main():
     parser.add_argument('--run-dir', type=Path, required=True)
     parser.add_argument('--rounds', type=int, default=200)
     parser.add_argument('--warmups', type=int, default=10)
+    parser.add_argument('--phase-design', choices=('ab', 'abba'), default='abba',
+                        help='metadata label; ab is the current single A->B run')
     args = parser.parse_args()
     profile = json.loads(args.profile.read_text())
     source = json.loads(args.source_workload.read_text())
@@ -70,7 +72,9 @@ def main():
                 source_workload=str(args.source_workload.resolve()),
                 profile_sha256=hashlib.sha256((run/'profile.json').read_bytes()).hexdigest(),
                 n_reads_formula=profile['n_reads_formula'], workload_kind='hisparse_mean_derived_synthetic_nvme',
-                phase_design='fresh_sequential_abba', mapping_assumption=profile['mapping_assumption'])
+                phase_design=('fresh_sequential_ab' if args.phase_design == 'ab'
+                              else 'fresh_sequential_abba'),
+                mapping_assumption=profile['mapping_assumption'])
     (run/'workload.json').write_text(json.dumps(meta, indent=2))
     print(json.dumps(dict(run_dir=str(run), configurations=configs, trace_records=nrecords,
                           trace_bytes=(run/'trace.bin').stat().st_size), indent=2))

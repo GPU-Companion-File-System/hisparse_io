@@ -1,0 +1,122 @@
+{
+  "status": "proposed_not_executed",
+  "purpose": "Synthetic NVMe IO counts anchored to HiSparse locality measurements; not an original HiSparse SSD trace",
+  "top_k": 2048,
+  "local_decode_batch_sizes": [
+    1,
+    4,
+    16,
+    64
+  ],
+  "batch_source": "Representative scale points in HiSparse Fig.7 kernel batch sweep; our chosen subset, not a claim of all paper sample points",
+  "batch_source_url": "https://arxiv.org/html/2608.07009v1#S4.SS4",
+  "round_scope": "one layer of one decode step across local requests",
+  "physical_io_bytes": 4096,
+  "logical_record_bytes": null,
+  "mapping_assumption": "one logical GPU-cache miss maps to one 4 KiB SSD read; no host-cache hits or packing modeled",
+  "n_reads_formula": "round(local_decode_batch * top_k * reference_mean_miss_rate)",
+  "preferred_when_trace_available": "sum(actual per-request layer-local misses), followed by explicit physical block mapping and deduplication",
+  "reference_scope": "GLM-5.1 LongBenchV2 selected-token replay; rates are trace averages, not universal constants",
+  "scenarios": [
+    {
+      "name": "lru_4k_main",
+      "gpu_cache_slots_per_request_per_layer": 4096,
+      "policy": "LRU",
+      "reference_mean_miss_rate": 0.134
+    },
+    {
+      "name": "lru_8k_lower_miss",
+      "gpu_cache_slots_per_request_per_layer": 8192,
+      "policy": "LRU",
+      "reference_mean_miss_rate": 0.067
+    },
+    {
+      "name": "topk_only_staging_baseline",
+      "gpu_cache_slots_per_request_per_layer": 2048,
+      "policy": "top-k-only staging",
+      "reference_mean_miss_rate": 0.3
+    }
+  ],
+  "rates_source_url": "https://arxiv.org/html/2608.07009v1#S4.SS3",
+  "limitations": [
+    "No real TopK/LRU replay",
+    "Fixed mean counts omit layer/time/request correlations",
+    "Original HiSparse storage tier is pinned host DRAM, not SSD",
+    "Service-wide concurrency is not automatically local per-GPU batch",
+    "4 KiB IO granularity does not establish actual KV-record size"
+  ],
+  "derived_configurations": [
+    {
+      "scenario": "lru_4k_main",
+      "local_decode_batch": 1,
+      "reference_mean_miss_rate": 0.134,
+      "n_reads": 274
+    },
+    {
+      "scenario": "lru_4k_main",
+      "local_decode_batch": 4,
+      "reference_mean_miss_rate": 0.134,
+      "n_reads": 1098
+    },
+    {
+      "scenario": "lru_4k_main",
+      "local_decode_batch": 16,
+      "reference_mean_miss_rate": 0.134,
+      "n_reads": 4391
+    },
+    {
+      "scenario": "lru_4k_main",
+      "local_decode_batch": 64,
+      "reference_mean_miss_rate": 0.134,
+      "n_reads": 17564
+    },
+    {
+      "scenario": "lru_8k_lower_miss",
+      "local_decode_batch": 1,
+      "reference_mean_miss_rate": 0.067,
+      "n_reads": 137
+    },
+    {
+      "scenario": "lru_8k_lower_miss",
+      "local_decode_batch": 4,
+      "reference_mean_miss_rate": 0.067,
+      "n_reads": 549
+    },
+    {
+      "scenario": "lru_8k_lower_miss",
+      "local_decode_batch": 16,
+      "reference_mean_miss_rate": 0.067,
+      "n_reads": 2195
+    },
+    {
+      "scenario": "lru_8k_lower_miss",
+      "local_decode_batch": 64,
+      "reference_mean_miss_rate": 0.067,
+      "n_reads": 8782
+    },
+    {
+      "scenario": "topk_only_staging_baseline",
+      "local_decode_batch": 1,
+      "reference_mean_miss_rate": 0.3,
+      "n_reads": 614
+    },
+    {
+      "scenario": "topk_only_staging_baseline",
+      "local_decode_batch": 4,
+      "reference_mean_miss_rate": 0.3,
+      "n_reads": 2458
+    },
+    {
+      "scenario": "topk_only_staging_baseline",
+      "local_decode_batch": 16,
+      "reference_mean_miss_rate": 0.3,
+      "n_reads": 9830
+    },
+    {
+      "scenario": "topk_only_staging_baseline",
+      "local_decode_batch": 64,
+      "reference_mean_miss_rate": 0.3,
+      "n_reads": 39322
+    }
+  ]
+}

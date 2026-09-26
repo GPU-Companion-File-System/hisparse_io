@@ -12,7 +12,7 @@ RUN=results/NEW-PROFILE-RUN
 .venv/bin/python src/prepare_profile_trace.py \
   --profile configs/hisparse-profile.json \
   --source-workload results/run-20260907-101847-hisparse/workload.json \
-  --run-dir "$RUN"
+  --run-dir "$RUN" --phase-design ab
 ```
 
 `RUN` 必须不存在。数据文件路径和 SHA-256 从 `--source-workload` 继承；
@@ -46,7 +46,38 @@ mkdir -p results/NEW-DATASET
 `auto_mount: true` 是此部署 daemon 的要求；由 daemon 接管 Tutti 阶段的挂载和卸载。
 上次测量时的 daemon 配置保存在结果目录，仅作为历史证据，不应未经核对直接用于其他主机。
 
-## 完整四阶段
+## 当前 zfw 顺序 AB 预检
+
+迁移到当前 zfw ABI-2 时，使用 `tools/run_zfw_ab.py` 做一次 A→B 顺序预检：
+
+```bash
+canhazgpu run --gpu-ids 0 --nonblock --timeout 30m \
+  --note hisparse-zfw-ab -- \
+  .venv/bin/python tools/run_zfw_ab.py \
+  --run-dir results/NEW-RUN \
+  --gds-data /STANDARD-NVME/path/data.bin \
+  --tutti-data /mnt/snvme/gpu0/ssnvme2/data.bin
+```
+
+该 runner 不重启共享 zfw daemon，并要求两份确定性数据文件 SHA-256 相同。
+当前主机的 cuFile 不能注册 snvme；若 A 首个 batch 失败，应保留失败日志，
+单独验证 B 的 zfw 数据路径，不能计算 GDS/Tutti 加速比。配置模板见
+`configs/tutti-zfw-local-nvme.yaml`。
+
+## 公开 Tutti v0.1.1 ABI 1
+
+公开版本必须与 ABI 1 的 `snvme-core.ko`、`snvme.ko` 和公开 daemon 成套运行。
+本机已验证的命令和结果保存在
+`results/public-v011-cb-20260926/`；该次严格对照使用历史 GDS 的
+`0000:cb:00.0` 与公开 Tutti 的 `/dev/snvme0n1`，公开 Tutti 的 2,544 行全部通过 GPU 数据校验。
+
+GDS 阶段应按物理 PCI BDF 选择普通 NVMe。zwh 历史盘是
+`0000:cb:00.0`，当前动态设备名为 `/dev/nvme1n1`，并且需要以
+`mount -t ext4 -o data=ordered` 挂载。当前主机在该盘上仍出现
+`cuFileBatchIOSubmit` 5035 和 nvidia-fs DMA map failure，因此没有公开版本的
+GDS/Tutti 加速比结果。
+
+## 历史完整四阶段
 
 配置核对完毕后：
 
@@ -58,7 +89,7 @@ python3 src/audit_abba.py --run-dir "$RUN"
 .venv/bin/python src/analyze_abba.py --run-dir "$RUN"
 ```
 
-运行顺序为 GDS A1 → Tutti B1/B2 → GDS A2，使用同一 trace 和数据文件。
+历史运行顺序为 GDS A1 → Tutti B1/B2 → GDS A2，使用同一 trace 和数据文件。
 脚本按 BDF、序列号和文件系统 UUID 核对目标；在 GDS 阶段使用标准 nvme，在 Tutti 阶段使用现有 snvme。
 会做设备绑定切换、挂载及本实验 daemon 启停；不修改或重载内核模块，不停止原共享 daemon。
 正常完成会恢复初始绑定状态。所有输出拒绝覆盖，失败后先检查操作日志与设备状态，再决定恢复步骤。
